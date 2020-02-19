@@ -1,6 +1,7 @@
 package source;
 
 public final class Random {
+	//return a random int or double
 	
 	private Random() {}
 	

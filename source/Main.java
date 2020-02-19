@@ -41,10 +41,20 @@ public class Main implements ActionListener{
 			((MainFrame) frame).showText();
 			
 			//user input.
-			String target = detailsPanel.targetStringField.getText();
-			int populationNumber = Integer.parseInt(detailsPanel.populationField.getText());
-			double mutationRate = Double.parseDouble(detailsPanel.mutationRateField.getText());
-			mutationRate = mutationRate / 100;
+			String target = "Test";
+			int populationNumber = 200;
+			double mutationRate = 1;
+			
+			try {
+				target = detailsPanel.targetStringField.getText();
+				populationNumber = Integer.parseInt(detailsPanel.populationField.getText());
+				mutationRate = Double.parseDouble(detailsPanel.mutationRateField.getText());
+				mutationRate = mutationRate / 100;
+			} catch (Exception e) {
+				System.out.println("Wrong data type");
+				btn = false;
+				continue;
+			}
 			
 			//statistics.
 			int totalGenerations = 0;
@@ -61,12 +71,13 @@ public class Main implements ActionListener{
 				bestResult = pop.evalute();
 				totalGenerations++;
 				averageFitness = pop.averageFitness();
-				((MainFrame) frame).setText (
-						"generation: " + totalGenerations
-						+ "  |  best string: " + bestResult
-						+ "  |  average fitness: " + averageFitness
-						+ " / " + target.length()
-				);
+				
+				StringBuilder myString = new StringBuilder();
+				myString.append("generation: " + totalGenerations);
+				myString.insert(myString.length(), "  |  best string: " + bestResult);
+				myString.insert(myString.length(), "  |  average fitness: " + averageFitness);
+				myString.insert(myString.length(), " / " + target.length());
+				((MainFrame) frame).setText (myString.toString());
 			}
 			//((MainFrame) frame).setText("total generations: " + totalGenerations);
 			((MainFrame) frame).showText();

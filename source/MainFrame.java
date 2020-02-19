@@ -42,12 +42,13 @@ public class MainFrame extends JFrame implements ActionListener{
 	}
 	
 	public void setText(String s) {
-		myString.append(s);
-		myString.append("\n");
+		myString.insert(myString.length(), s);
+		myString.insert(myString.length(), "\n");
+		area.setText(s);
 	}
 	
 	public void showText() {
-		area.setText("<html>" + myString.toString().replaceAll("\n", "<br/>") + "<html>");
+		area.setText("<html>" + myString.toString().replaceAll(" ", "&nbsp;").replaceAll("\n", "<br/>") + "<html>");
 	}
 	
 	public void clearText() {
